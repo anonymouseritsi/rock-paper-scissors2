@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROCK PAPER SCISSORS</title>
+</head>
+<style>
+    body {
+            background-color: #645E60;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            color: #FFF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;}
+    
+    #top {
+        font-size: 40px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        text-align: center;
+        color: yellow;
+        
+    }
+    #display {
+        width: 150px;
+        display: inline-block;
+        margin-right: 500px;
+    }
+    #displayimage{
+        height: 300px;
+        border-radius: 40px;
+    }
+
+    #displayimage2{
+        height: 300px;
+        border-radius: 40px;
+    }
+    #displaytext {
+        font-size: 40px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        text-align: center;
+        /* margin-left: 150px; */
+        color: yellow;
+    }
+
+    #opponent {
+        width: 150px;
+        display: inline-block;
+        text-align: right;  
+        margin-right: 130px;       
+     }
+     #fbutton {
+        background-color: aqua;
+        width: 150px;
+        height: 80px;
+        border-radius: 40px;
+        /* margin-left: 300px; */
+        
+        text-align: center;
+        font-size: 40px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+     }
+
+     #resetbutton {
+        background-color: red;
+        width: 150px;
+        height: 80px;
+        border-radius: 40px;
+        /* margin-left: 300px; */
+        text-align: center;
+        font-size: 40px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        
+    }
+    
+     #score {
+        font-size: 30px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        color: aqua;
+        /* margin-left: 200px; */
+        display: inline-block;
+        
+    }
+    #score2 {
+        font-size: 30px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        color: aqua;
+        display: inline-block;
+        margin-left: 300px;
+    }
+
+    .container {
+    max-width: 1000px;
+    background-color: #645E60; 
+    text-align: center;
+    border-radius: 10px;
+    padding: 20px;
+    width: 90%;
+            
+
+    
+    }
+
+    @media (max-width: 600px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            #score, #score2 {
+                font-size: 1.2em;
+            }
+            #displayimage, #displayimage2 {
+                height: 80px;
+            }
+            #fbutton, #resetbutton {
+                width: 120px;
+                height: 50px;
+                font-size: 1em;
+            }
+
+}
+
+
+    
+
+</style>
+
+
+<body style="background-color: rgb(190, 46, 106);">
+
+<div class="container">
+    <h1 id="top">ROCK PAPER SCISSORS!</h1>
+    
+    <div  id="container">
+    <p id="score">Player 1 Score: <span id="playerScore">0</span></p>
+    <p id="score2">Player 2 Score: <span id="playerScore2">0</span></p>
+    </div>
+
+    <p id="displaytext"></p>
+    <div id="display">
+        <img id="displayimage" src="" alt="Choice Image">
+    </div>
+    <div id="opponent">
+        <img id="displayimage2" src="" alt="Choice Image">
+    </div>
+    <div>
+        <button id="fbutton" onclick="fight()">FIGHT!</button>
+        <button id="resetbutton" onclick="resetScores()">RESET</button>
+    </div>
+</div>
+
+    <script>
+    const choices = ["rock", "paper", "scissors"];
+        const choices2 = ["paper", "scissors", "rock"];
+        let player1Score = 0;
+        let player2Score = 0;
+
+        function fight() {
+            const displayimage = document.getElementById("displayimage");
+            const displayimage2 = document.getElementById("displayimage2");
+            const displaytext = document.getElementById("displaytext");
+            const playerScoreDisplay = document.getElementById("playerScore");
+            const playerScoreDisplay2 = document.getElementById("playerScore2");
+            const fightButton = document.getElementById("fbutton");
+            const randomIndex = Math.floor(Math.random() * choices.length);
+            const randomIndex2 = Math.floor(Math.random() * choices2.length);
+            const randomChoice = choices[randomIndex];
+            const opponentChoice = choices2[randomIndex2];
+
+            if (player1Score >= 5) {
+                displaytext.textContent = "Player 1 has won the game!";}
+            if (player2Score >= 5) {
+                displaytext.textContent = "Player 2 has won the game!";}
+
+            if (randomChoice === "rock") {
+                displayimage.src = "giphy.webp";
+            } else if (randomChoice === "paper") {
+                displayimage.src = "paper.webp";
+            } else if (randomChoice === "scissors") {
+                displayimage.src = "scissors.webp";
+            }
+
+            if (opponentChoice === "rock") {
+                displayimage2.src = "giphy.webp";
+            } else if (opponentChoice === "paper") {
+                displayimage2.src = "paper.webp";
+            } else if (opponentChoice === "scissors") {
+                displayimage2.src = "scissors.webp";
+            }
+
+
+            if (randomChoice === opponentChoice) {
+                displaytext.textContent = "DRAW";
+            } else if (
+                (randomChoice === "rock" && opponentChoice === "scissors") ||
+                (randomChoice === "paper" && opponentChoice === "rock") ||
+                (randomChoice === "scissors" && opponentChoice === "paper")
+            ) {
+                displaytext.textContent = "Player 1 WINS";
+                player1Score++;
+                playerScoreDisplay.textContent = player1Score;
+                
+            } else {
+                displaytext.textContent = "Player 2 WINS";
+                player2Score++;
+                playerScoreDisplay2.textContent = player2Score;
+            }
+
+            if (player1Score == 5) {
+                displaytext.textContent = "Player 1 has won the game!";
+                fightButton.disabled = true;}
+                
+                
+                
+            if (player2Score == 5) {
+                displaytext.textContent = "Player 2 has won the game!";
+                fightButton.disabled = true;} 
+                
+
+        }
+
+
+        function resetScores() {
+            player1Score = 0;
+            player2Score = 0;
+            document.getElementById("playerScore").textContent = player1Score;
+            document.getElementById("playerScore2").textContent = player2Score;
+            document.getElementById("fbutton").disabled = false;
+        }            
+            
+
+        
+    </script>
+
+</body>
+</html>
